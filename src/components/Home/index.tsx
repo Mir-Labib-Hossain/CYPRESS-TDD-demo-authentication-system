@@ -1,17 +1,18 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../redux/app/hooks";
-import { removeSession } from "../../redux/feature/authSlice";
+import { removeSession } from "../../redux/features/authSlice";
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const logout = () => {
-    dispatch(removeSession());
-    navigate("/login");
-  };
+  const logout = () => dispatch(removeSession());
+
   return (
     <>
-      <h1>Welcome </h1><button onClick={logout}>log-out</button>
+      <h1 data-testid="welcome-text">Welcome</h1>
+      <button onClick={logout}>Log-out</button>
+      <br />
+      <br />
+      <Link to="/login">Log-in</Link>
     </>
   );
 };

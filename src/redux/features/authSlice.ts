@@ -14,6 +14,8 @@ const authSlice = createSlice({
       state.session = action.payload;
     },
     removeSession(state) {
+      console.log("removeSession");
+      
       state.session = null;
     },
   },

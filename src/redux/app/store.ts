@@ -3,7 +3,8 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
-import authSlice from "../feature/authSlice";
+import { authApi } from "../apis/authApi";
+import authSlice from "../features/authSlice";
 
 const persistConfig = {
   key: "root",
@@ -18,12 +19,12 @@ const persistedReducer = persistReducer(persistConfig, persistedReducers);
 
 const reducers = {
   persistedReducer,
- };
+  [authApi.reducerPath]: authApi.reducer,
+};
 
 export const store = configureStore({
   reducer: reducers,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
-  
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat(authApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -5,22 +5,30 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import PrivateOutlet from "./components/privateOutlet";
 import { persistor, store } from "./redux/app/store";
+import "./styles.css";
 
 function App() {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/*" element={<PrivateOutlet />}>
-              <Route path="" element={<Home />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
+    <div className="container">
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/*" element={<PrivateOutlet />}>
+                <Route path="" element={<Home />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
+    </div>
   );
+}
+
+if ((window as any).Cypress) {
+  (window as any).store = store;
+  console.log("xox");
 }
 
 export default App;

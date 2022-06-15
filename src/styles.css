@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+}
+.container{
+
+    background-image: url(https://img.freepik.com/free-vector/white-background-with-triangle-patterns_1017-18410.jpg?w=2000);
+    background-size: cover;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+}
